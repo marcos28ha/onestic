@@ -1,0 +1,10 @@
+version: "3.4"
+
+services:
+  backend:
+    build: backend
+    image: backend
+    volumes:
+      - ./backend/:/app
+    ports:
+      - 3001:3001
