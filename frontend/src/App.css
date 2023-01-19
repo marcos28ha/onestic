@@ -1,38 +1,69 @@
-.App {
+html, body {
+  margin: 0;
+  height: 100%;
+}
+
+#root{
+ background: #fcb1a6;
+ height: 100%;
+}
+
+div {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+#header{
+  background-color: #5d2a42;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 10px;
+  color:#eaeaea;
 }
 
-.App-link {
-  color: #61dafb;
+#content{
+  display:flex;
+  justify-content: center;
+  color: #5d2a42;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#submitionBox{
+  border-radius: 5%;
+  margin-top: 40px;
+  display: inline-block;
+  background-color: #fff9ec;
+  padding: 20px;
+}
+
+.submition > div {
+  display:flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.form-control{
+  color: #5d2a42;
+}
+
+#input {
+  display: none;
+}
+
+#buttonDiv{
+  margin-top: 20px;
+}
+
+.submition{
+  padding: 10px;
+  margin-bottom: 20px;
+  
+}
+
+button{
+  background-color: #73628a;
+  border-radius: 20%;
+  color:#eaeaea;
+}
+
+button:hover {
+  background-color: #448fb7;
 }

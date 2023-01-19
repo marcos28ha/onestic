@@ -1,9 +1,10 @@
 import logo from './logo.svg';
-import './App.css';
 import { sendFiles } from './services/endpoint'
 import { useState } from 'react';
 import { getDataFromFile, createFileFromData } from './services/fileService'
-import fileDownload from 'react-file-download' 
+import fileDownload from 'react-file-download'
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
 const App = () => {
   const [customersFile, setCustomersFile] = useState([])
@@ -22,23 +23,27 @@ const App = () => {
 
     return(
       <div>
-        <h1>Archivos</h1>
-        <FileSubmmiter fileName={'customers'} fileData= {customersFile} handleOnFileUpload={setHandleOnFileUpload(setCustomersFile)}/>
-        <FileSubmmiter fileName={'products'} fileData= {productsFile} handleOnFileUpload={setHandleOnFileUpload(setProductsFile)}/>
-        <FileSubmmiter fileName={'orders'} fileData= {ordersFile} handleOnFileUpload={setHandleOnFileUpload(setOrdersFile)}/>
-        <RequestSender customersFile={customersFile} productsFile={productsFile} ordersFile={ordersFile}/>
+        <Header/>
+        <div id={'content'}>
+          <div>
+            <div id={'submitionBox'}>
+              <FileSubmmiter fileName={'Clientes'} fileData= {customersFile} handleOnFileUpload={setHandleOnFileUpload(setCustomersFile)}/>
+              <FileSubmmiter fileName={'Productos'} fileData= {productsFile} handleOnFileUpload={setHandleOnFileUpload(setProductsFile)}/>
+              <FileSubmmiter fileName={'Pedidos'} fileData= {ordersFile} handleOnFileUpload={setHandleOnFileUpload(setOrdersFile)}/>
+            </div>
+            <RequestSender customersFile={customersFile} productsFile={productsFile} ordersFile={ordersFile}/>
+          </div>
+        </div>
       </div>
     )
 }
 
-const FileSubmmiter = ({fileName, fileData, handleOnFileUpload}) => {
-
-  
+const FileSubmmiter = ({fileName, handleOnFileUpload}) => {
 
   return(
-    <div>
-      <h2>{fileName}</h2>
-      <input id={fileName + 'Uploader'} type='file' multiple
+    <div className={'submition'}>
+      <div><h2>{fileName}</h2></div>
+      <input className={'form-control'} type='file'
           accept='text/csv' onChange={(event) => handleOnFileUpload(event)}/>
     </div>
   )
@@ -63,8 +68,18 @@ const RequestSender = ({customersFile, productsFile, ordersFile}) => {
   }
 
   return(
-    <div>
-      <button disabled={customersFile.length === 0 || productsFile.length === 0 || ordersFile.length === 0} onClick={sendData}>Send Files</button>
+    <div id={'buttonDiv'}>
+      <button disabled={customersFile.length === 0 || productsFile.length === 0 || ordersFile.length === 0} onClick={sendData}>Generar archivos</button>
+    </div>
+  )
+}
+
+const Header = () => {
+
+
+  return(
+    <div id={'header'}>
+      <h1>Generador de estadísticas</h1>
     </div>
   )
 }

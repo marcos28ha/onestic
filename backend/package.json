@@ -5,22 +5,22 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --exec npm start"
+    "dev": "nodemon --exec npm start",
+    "test": "jest --verbose"
   },
   "author": "Marcos Herrero Arnedo",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
-    "csv": "^6.2.5",
-    "csv-parse": "^5.3.3",
     "express": "^4.18.2",
-    "json2csv": "^5.0.7",
-    "morgan": "^1.10.0",
-    "multer": "^1.4.5-lts.1",
-    "uniqid": "^5.4.0"
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.20"
+    "jest": "^29.3.1",
+    "nodemon": "^2.0.20",
+    "supertest": "^6.3.3"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }
