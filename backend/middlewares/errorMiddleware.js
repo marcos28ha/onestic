@@ -4,7 +4,10 @@ const unknownEndpoint = (request, response) => {
   
 const inputValidator = (request, response, next) => {
     const body = request.body
-    if(!(body.customers && body.products && body.orders)){
+    if(request.method != 'POST'){
+        return response.status(404).send({ error: 'Endpoint desconocido'})
+    }
+    else if(!(body.customers && body.products && body.orders)){
         return response.status(400).send({ error: 'Faltan uno o más archivos'})
     } else if((body.customers.length === 0 || body.products.length === 0  || body.orders.length === 0 )){
         return response.status(400).send({ error: 'Uno o más archivos se encuentran vacios'})

@@ -24,6 +24,7 @@ div {
   display:flex;
   justify-content: center;
   color: #5d2a42;
+  height: 100%;
 }
 
 #submitionBox{
@@ -62,8 +63,15 @@ button{
   background-color: #73628a;
   border-radius: 20%;
   color:#eaeaea;
+  margin-bottom: 20px;;
 }
 
 button:hover {
-  background-color: #448fb7;
+  background-color: #cc92fb;
+}
+
+#notification {
+  margin-top: 10px;
+  border: 1px solid black;
+  padding: 5px;
 }

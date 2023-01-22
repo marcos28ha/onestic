@@ -14,3 +14,15 @@ Por último, para el tercer algoritmo mi idea era usar los datos obtenidos en el
 Tan solo quedaba generar los archivos con los resultados. Al igual que al principio busqué una librería que me permitiera convertir un JSON a csv. Encontré la libreria json2csv la cual permitia también formatear fácilmente el string, así que aproveché para configurarla de forma que no se imprimiera el campo "customer" del primer ejercicio el cuál había añadido en el ejercicio anterior. Tuve un pequeño problema dado que por defecto los campos se imprimian con los caracteres "". Buscando en la documentación de la librería encontré que usando el parametro quote en la configuración se podían eliminar. Tan solo quedaba generar los archivos usando "fs".
 
 ## EXTRAS
+
+### TESTING
+En la fase del testing el objetivo era encontrar algún fallo, primero en los algoritmos a nivel unitario, y después el funcionamiento de la API.
+Usé la librería "Jest" para hacer las validaciones.
+
+En los tests del primer algoritmo comprobé que no faltara ningun dato y que la suma del precio de los productos fuese la correcta. Una vez finalizados no encontré ningún fallo.
+En el segundo algoritmo quise comprobar primero que si un producto no había sido comprado se devolviese una respuesta adecuada, y después que la lista de clientes por cada producto fuese la correcta.
+Para el último testee que si un cliente no tenía ningún pedido su total fuera 0, después que la suma fuera la correcta, y por último que el orden de los clientes fuera el apropiado.
+
+Para testear la API decidí usar la librería "supertest". Primero hice algún test basico como que la respuesta fuera en JSON, o que los tres campos que luego se convertirán a CSV están presentes.
+Luego, probé como reacciona el servidor a inputs inesperados. Aquí descubrí que ante una llamada con cuerpo vacio, el servidor devolvía un error interno. Esto lo arreglé añadiendo un middleware que comprobaba el formato del input y devolvia una respuesta con el código 400 y un mensaje informando del error. A su vez, también se proporciona un mensaje de error si se utiliza un método diferente a POST, o si surge un error porque los archivos contienen un formato defectuoso.
+

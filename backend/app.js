@@ -17,7 +17,6 @@ router.post('/', (req, res, next) => {
         const result = generateData(customers, products, orders)
         res.status(200).send(result)
     }catch(error){
-        console.log('Last tier catch')
         next(error)
     }
 })

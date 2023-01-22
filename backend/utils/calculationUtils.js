@@ -14,7 +14,6 @@ const totalCost = (products, orders) => {
         })
         return result
     }catch(error){
-        console.log('catched')
         throw error
     }
     
@@ -36,7 +35,6 @@ const customersByProduct = (products, orders) => {
         })
         return result
     }catch(error){
-        console.log('catched')
         throw error
     }
 
@@ -60,7 +58,6 @@ const customerRanking = (orderCost, customers) => {
         })
         return result
     }catch(error){
-        console.log('catched')
         throw error
     }
 

@@ -10,6 +10,7 @@ const App = () => {
   const [customersFile, setCustomersFile] = useState([])
   const [productsFile, setProductsFile] = useState([])
   const [ordersFile, setOrdersFile] = useState([])
+  const [errorMessage, setErrorMessage] = useState(null)
 
   const setHandleOnFileUpload = (setFile) => {
     const handleOnFileUpload = async(event) => {
@@ -31,7 +32,8 @@ const App = () => {
               <FileSubmmiter fileName={'Productos'} fileData= {productsFile} handleOnFileUpload={setHandleOnFileUpload(setProductsFile)}/>
               <FileSubmmiter fileName={'Pedidos'} fileData= {ordersFile} handleOnFileUpload={setHandleOnFileUpload(setOrdersFile)}/>
             </div>
-            <RequestSender customersFile={customersFile} productsFile={productsFile} ordersFile={ordersFile}/>
+            { errorMessage ? <Notification message={errorMessage}/> : null}
+            <RequestSender customersFile={customersFile} productsFile={productsFile} ordersFile={ordersFile} setErrorMessage={setErrorMessage}/>
           </div>
         </div>
       </div>
@@ -49,21 +51,26 @@ const FileSubmmiter = ({fileName, handleOnFileUpload}) => {
   )
 }
 
-const RequestSender = ({customersFile, productsFile, ordersFile}) => {
+const RequestSender = ({customersFile, productsFile, ordersFile, setErrorMessage}) => {
 
   const dataToSend = {customers: customersFile, products: productsFile, orders: ordersFile}
 
   const sendData = async() => {
 
-    const res = await sendFiles(dataToSend) 
-
-    const orderTotalFile = await createFileFromData(res.data.orderCost)
-    const customersProducts = await createFileFromData(res.data.customersProducts)
-    const customersPaidAmount = await createFileFromData(res.data.customersPaidAmount)
+    const res = await sendFiles(dataToSend)
     
-    fileDownload(orderTotalFile, 'order_prices.csv');
-    fileDownload(customersProducts, 'product_customers.csv');
-    fileDownload(customersPaidAmount, 'customer_ranking.csv');
+    if(res.data.error){
+      setErrorMessage(res.data.error)
+      setTimeout(() => setErrorMessage(null), 5000)
+    }else{
+      const orderTotalFile = await createFileFromData(res.data.orderCost)
+      const customersProducts = await createFileFromData(res.data.customersProducts)
+      const customersPaidAmount = await createFileFromData(res.data.customersPaidAmount)
+      
+      fileDownload(orderTotalFile, 'order_prices.csv');
+      fileDownload(customersProducts, 'product_customers.csv');
+      fileDownload(customersPaidAmount, 'customer_ranking.csv');
+    }
     
   }
 
@@ -76,10 +83,17 @@ const RequestSender = ({customersFile, productsFile, ordersFile}) => {
 
 const Header = () => {
 
-
   return(
     <div id={'header'}>
       <h1>Generador de estadísticas</h1>
+    </div>
+  )
+}
+
+const Notification = ({message}) => {
+  return(
+    <div id={'notification'}>
+      {message}
     </div>
   )
 }

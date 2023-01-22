@@ -10,7 +10,6 @@ const generateData = (customers, products, orders) => {
 
         return {orderCost, customersProducts, customersPaidAmount}
     }catch(error){
-        console.log('catched')
         throw error
     }
 }
