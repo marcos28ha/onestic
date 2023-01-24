@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import { sendFiles } from './services/endpoint'
 import { useState } from 'react';
 import { getDataFromFile, createFileFromData } from './services/fileService'

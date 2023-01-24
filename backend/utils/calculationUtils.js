@@ -4,7 +4,13 @@ const totalCost = (products, orders) => {
         orders.forEach((order) => {
             let productsArray = order.products.split(" ")
             let costArray = productsArray.map(function (product){
+                
                 let res = products.find(p => p.id == product)
+                if(!res.cost){
+                    let error = new Error()
+                    error.name = 'TypeError'
+                    throw error
+                }
                 return Number(res.cost)
             })
             const orderCost = costArray.reduce(
@@ -44,6 +50,11 @@ const customerRanking = (orderCost, customers) => {
     try{
         let result = []
         customers.forEach((customer) => {
+            if(!customer.firstname || !customer.lastname){
+                let error = new Error()
+                error.name = 'TypeError'
+                throw error
+            }
             let totalSum = 0
             orderCost.forEach((order) => {
                 if(order.customer == customer.id){

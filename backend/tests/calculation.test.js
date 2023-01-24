@@ -92,7 +92,7 @@ describe('API TESTS', () => {
     
     test('La respuesta debe ser un JSON', async() => {
         await api
-        .post("/")
+        .post("/api")
         .send(sampleData)
         .expect(200)
         .expect('Content-Type', /application\/json/)
@@ -100,7 +100,7 @@ describe('API TESTS', () => {
 
     test('Si falta un archivo, la respuesta debe informar de ello', async() => {
         const response = await api
-        .post("/")
+        .post("/api")
         .send({
                 customers:[{id: '0', firstname: 'John', lastname: 'Maxwell'}],
                 products:[{id: '0', name: 'screwdriver', cost: '2.98'}]
@@ -111,7 +111,7 @@ describe('API TESTS', () => {
 
     test('Si un archivo está vacio, la respuesta debe informar de ello', async() => {
         const response = await api
-        .post("/")
+        .post("/api")
         .send({
                 customers:[{id: '0', firstname: 'John', lastname: 'Maxwell'}],
                 products:[],
